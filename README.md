@@ -2,7 +2,7 @@
 
 ## Herramienta para el manejo del sistema de ficheros
 
-> *Obtiene información, manipula y ofrece funciones sobre discos, directorio y ficheros.*
+> *Obtiene información, manipula y ofrece funciones sobre discos, directorios y ficheros.*
 >
 > *Trabaja sobre* **HDs, USBs, RAMDiscs, ISOs, CDROMs**
 >
