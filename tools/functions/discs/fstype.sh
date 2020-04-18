@@ -28,11 +28,10 @@ function fstype(){
 
     info=$(file -b "$origen")
 
-    if [[ "$info" =~ "block special" ]]; then
-        lsblk -n -o FSTYPE $origen
-        return $?
-    else
-        df -T $(lsdev "$origen") | tail -n 1 | awk '{ print $2 }'
-        return $?
+    if [[ ! "$info" =~ "block special" ]]; then
+        origen=$(lsdev "$origen")
     fi
+    
+    lsblk -n -o FSTYPE $origen
+    return $?
 }
