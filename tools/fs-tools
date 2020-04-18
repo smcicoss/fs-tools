@@ -1,0 +1,84 @@
+#! /bin/bash
+# -*- ENCODING: UTF-8 -*-
+#·
+#######################################################
+#			        fs-tools
+#------------------------------------------------------
+# Ejecuta una variedad de comandos para la información
+#   y manipulación del sistema de ficheros
+#------------------------------------------------------
+# autor:	Simón Martínez <simon@cicoss.net>
+# fecha:	vie abr 17 14:41:56 CEST 2020
+#######################################################
+
+declare -r msg_panic="\e[0;101;30m"
+declare -r msg_error="\e[0;40;31m"
+declare -r msg_warning="\e[0;40;33m"
+declare -r msg_ok="\e[0;40;32m"
+declare -r msg_end="\e[0m"
+declare -r msg_emphasis="\e[1;37m"
+
+declare -r currentdate=$(date)
+
+if [[ $# -gt 0 && $1 == "-v" ]]; then verbose=0; shift; fi
+if [ $# -lt 1 ]; then
+    echo -e $msg_panic" Ha de especificar al menos la utilidad a ejecutar "$msg_end
+    exit 255
+fi
+
+util="$1"
+shift
+
+case "$util" in
+    "lsfs")     # lista el filesystem
+        source "tools/functions/discs/lsfs.sh"
+        if [ "$verbose" ]; then
+            echo -en "\n$msg_emphasis"
+            printf '\055%.0s' {1..70}
+            printf '\n%-40s%30s\n' "$0" "$currentdate"
+            printf '\055%.0s' {1..70}; echo ""
+        fi
+        lsfs
+        if [ "$verbose" ]; then
+            printf '\055%.0s' {1..70}; echo ""
+            echo -e $msg_end
+        fi
+        exit $?
+        ;;
+
+    "lsdev")    # obtiene el device
+        source "tools/functions/discs/lsdev.sh"
+        if [ "$verbose" ]; then
+            echo -en "\n$msg_emphasis"
+            printf '\055%.0s' {1..70}
+            printf '\n%-40s%30s\n' "$0 lsdev" "$currentdate"
+            printf '\055%.0s' {1..70}; echo ""
+            lsdev -v $@
+            printf '\055%.0s' {1..70}; echo ""
+            echo -e $msg_end
+        else
+            lsdev $@
+        fi
+        ;;
+
+    "lsuuid")   # obtiene el UUID
+        source "tools/functions/discs/lsdev.sh"
+        source "tools/functions/discs/lsuuid.sh"
+        lsuuid "$@"
+        exit $?
+        ;;
+    
+    "fstype")   # tipo del sistema de ficheros
+        source "tools/functions/discs/lsdev.sh"
+        source "tools/functions/discs/fstype.sh"
+        fstype "$@"
+        exit $?
+        ;;
+        
+    *)          # deconocido
+        echo -e $msg_error
+        echo -en " Error: el comando $msg_panic'$1'$msg_error no existe "
+        echo -e $msg_end
+        exit 254
+        ;;
+esac
