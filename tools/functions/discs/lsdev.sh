@@ -38,7 +38,7 @@ function lsdev(){
         df --sync -hT "$origen"
         return $?
     else
-        df "$origen" | grep "/" | cut -d " " -f 1
+        df --sync "$origen" | grep "/" | cut -d " " -f 1
         return $?
     fi
 }

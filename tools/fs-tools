@@ -22,7 +22,7 @@ declare -r currentdate=$(date)
 
 if [[ $# -gt 0 && $1 == "-v" ]]; then verbose=0; shift; fi
 if [ $# -lt 1 ]; then
-    echo -e $msg_panic" Ha de especificar al menos la utilidad a ejecutar "$msg_end
+    echo -e $msg_panic" Faltan parámetros "$msg_end
     exit 255
 fi
 
@@ -39,11 +39,30 @@ case "$util" in
             printf '\055%.0s' {1..70}; echo ""
         fi
         lsfs
+        retcode=$?
         if [ "$verbose" ]; then
             printf '\055%.0s' {1..70}; echo ""
             echo -e $msg_end
         fi
-        exit $?
+        exit $retcode
+        ;;
+
+    "lsdiscs")  # lista los discos en el systema
+        source "tools/functions/discs/lsdiscs.sh"
+        if [ "$verbose" ]; then
+            echo -en "\n$msg_emphasis"
+            printf '\055%.0s' {1..70}
+            printf '\n%-40s%30s\n' "$0" "$currentdate"
+            printf '\055%.0s' {1..70}; echo ""
+            lsdiscs -v
+            retcode=$?
+            printf '\055%.0s' {1..70}; echo ""
+            echo -e $msg_end
+            exit $retcode
+        else
+            lsdiscs
+            exit $?
+        fi
         ;;
 
     "lsdev")    # obtiene el device
@@ -74,7 +93,7 @@ case "$util" in
         fstype "$@"
         exit $?
         ;;
-        
+
     *)          # deconocido
         echo -e $msg_error
         echo -en " Error: el comando $msg_panic'$1'$msg_error no existe "
