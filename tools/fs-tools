@@ -35,7 +35,7 @@ case "$util" in
         if [ "$verbose" ]; then
             echo -en "\n$msg_emphasis"
             printf '\055%.0s' {1..70}
-            printf '\n%-40s%30s\n' "$0" "$currentdate"
+            printf '\n%-40s%30s\n' "$0 lsfs" "$currentdate"
             printf '\055%.0s' {1..70}; echo ""
         fi
         lsfs
@@ -52,7 +52,7 @@ case "$util" in
         if [ "$verbose" ]; then
             echo -en "\n$msg_emphasis"
             printf '\055%.0s' {1..70}
-            printf '\n%-40s%30s\n' "$0" "$currentdate"
+            printf '\n%-40s%30s\n' "$0 lsdiscs" "$currentdate"
             printf '\055%.0s' {1..70}; echo ""
             lsdiscs -v
             retcode=$?
@@ -65,6 +65,25 @@ case "$util" in
         fi
         ;;
 
+    "lsparts")
+        source "tools/functions/discs/lsdev.sh"
+        source "tools/functions/discs/lsparts.sh"
+        if [ "$verbose" ]; then
+            echo -en "\n$msg_emphasis"
+            printf '\055%.0s' {1..70}
+            printf '\n%-40s%30s\n' "$0 lsparts" "$currentdate"
+            printf '\055%.0s' {1..70}; echo ""
+            lsparts -v "$@"
+            retcode=$?
+            printf '\055%.0s' {1..70}; echo ""
+            echo -e $msg_end
+            exit $retcode
+        else
+            lsparts "$@"
+            exit $?
+        fi
+        ;;
+
     "lsdev")    # obtiene el device
         source "tools/functions/discs/lsdev.sh"
         if [ "$verbose" ]; then
@@ -73,10 +92,13 @@ case "$util" in
             printf '\n%-40s%30s\n' "$0 lsdev" "$currentdate"
             printf '\055%.0s' {1..70}; echo ""
             lsdev -v $@
+            retcode=$?
             printf '\055%.0s' {1..70}; echo ""
             echo -e $msg_end
+            exit $retcode
         else
             lsdev $@
+            exit $?
         fi
         ;;
 
