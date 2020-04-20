@@ -4,8 +4,8 @@
 #######################################################
 #						fstype
 #------------------------------------------------------
-#	Muestra el sistema de ficheros de una partición o
-#       un directorio
+#	Muestra el sistema de ficheros de una partición 
+#       o un directorio
 #------------------------------------------------------
 # autor:	Simón Martínez <simon@cicoss.net>
 #------------------------------------------------------

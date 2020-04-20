@@ -2,15 +2,14 @@
 # -*- ENCODING: UTF-8 -*-
 #·
 #######################################################
-#			        filesystem
+#			      function lsusbdiscs
 #------------------------------------------------------
-# Devuelve la estructura del sistema de ficheros
+#	Lista los discos usb
 #------------------------------------------------------
 # autor:	Simón Martínez <simon@cicoss.net>
-# fecha:	mié ene 22 03:14:03 CET 2020
 #######################################################
 
-function lsfs(){
-    lsblk -o NAME,TYPE,SIZE,MODEL,MOUNTPOINT
+function lsusbdiscs(){
+    grep -Ff <(sudo hwinfo --disk --short) <(sudo hwinfo --usb --short) | grep -v "disk:"
     return $?
-}
+ }
