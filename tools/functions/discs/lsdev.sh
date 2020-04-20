@@ -22,23 +22,21 @@ function lsdev(){
     if [[ $# -ne 0 && $1 == "-v" ]]; then local verbose=0; shift; fi
 
     if [ $# -ne 0 ]; then
-        origen=$(realpath "$1")
+        source=$(realpath "$1")
     else
-        origen=$(realpath ".")
+        source=$(realpath ".")
     fi
 
-    if [ -d "$origen" ]; then
+    if [ -d "$source" ]; then
         #Si es un directorio tal cual
-        origen="$origen/"
-    else
-        origen="$origen"
+        source="$source/"
     fi
 
     if [ "$verbose" ]; then
-        df --sync -hT "$origen"
+        df --sync -hT "$source"
         return $?
     else
-        df --sync "$origen" | grep "/" | cut -d " " -f 1
+        df --sync "$source" | grep "/" | cut -d " " -f 1
         return $?
     fi
 }

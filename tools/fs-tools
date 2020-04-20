@@ -65,7 +65,7 @@ case "$util" in
         fi
         ;;
 
-    "lsparts")
+    "lsparts")  # lista las particiones
         source "tools/functions/discs/lsdev.sh"
         source "tools/functions/discs/lsparts.sh"
         if [ "$verbose" ]; then
@@ -109,7 +109,14 @@ case "$util" in
         exit $?
         ;;
     
-    "fstype")   # tipo del sistema de ficheros
+    "lslabel")  # obtiene el LABEL
+        source "tools/functions/discs/lsdev.sh"
+        source "tools/functions/discs/lslabel.sh"
+        lslabel "$@"
+        exit $?
+        ;;
+
+    "fstype")   # obtiene tipo del sistema de ficheros
         source "tools/functions/discs/lsdev.sh"
         source "tools/functions/discs/fstype.sh"
         fstype "$@"

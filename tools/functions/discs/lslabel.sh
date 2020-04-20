@@ -2,28 +2,29 @@
 # -*- ENCODING: UTF-8 -*-
 # ·
 #######################################################
-#			function lsuuid
+#			function label
 #------------------------------------------------------
-#	Muestra el UUID del sistema de ficheros
+#	Muestra la etiqueta de la partición
 #------------------------------------------------------
 # autor:	Simón Martínez <simon@cicoss.net>
 #------------------------------------------------------
 # Uso:
-# 	lsuuid [device | directorio | fichero]
+# 	label [device | directorio | fichero]
 #
 #	si no se especifica será el directorio actual
 #
-#	Requiere del script lsdev
+#	Requiere del script indev
 #
 #######################################################
 
-function lsuuid(){
+function lslabel(){
+
     if [ -z "$1" ]; then
         source=$(realpath ".")
     else
         source=$(realpath "$1")
     fi
-    
+
     if [ ! -e "$source" ]; then return 1; fi
 
     info=$(file -b "$source")
@@ -31,6 +32,7 @@ function lsuuid(){
     if [[ ! "$info" =~ "block special" ]]; then
         source=$(lsdev "$source")
     fi
-    sudo lsblk -n -o UUID "$source"
-    return 0
+
+    sudo lsblk -no LABEL $source
+    return $?
 }

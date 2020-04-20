@@ -20,18 +20,19 @@
 #######################################################
 
 function fstype(){
+    
     if [ -z "$1" ]; then
-        origen=$(realpath ".")
+        source=$(realpath ".")
     else
-        origen=$(realpath "$1")
+        source=$(realpath "$1")
     fi
 
-    info=$(file -b "$origen")
+    info=$(file -b "$source")
 
     if [[ ! "$info" =~ "block special" ]]; then
-        origen=$(lsdev "$origen")
+        source=$(lsdev "$source")
     fi
     
-    lsblk -n -o FSTYPE $origen
+    lsblk -n -o FSTYPE $source
     return $?
 }
