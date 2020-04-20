@@ -11,6 +11,11 @@
 # fecha:	vie abr 17 14:41:56 CEST 2020
 #######################################################
 
+# directorios instalación
+declare -r LIB_DIR="tools/functions/discs"
+declare -r CONF_DIR="datos/etc/fs-tools"
+
+# color
 declare -r msg_panic="\e[0;101;30m"
 declare -r msg_error="\e[0;40;31m"
 declare -r msg_warning="\e[0;40;33m"
@@ -29,10 +34,12 @@ fi
 util="$1"
 shift
 
+# carga la función solicitada
+source "$LIB_DIR/$util.sh"
+
 case "$util" in
     "lsfs")     # lista el filesystem
-        source "tools/functions/discs/lsfs.sh"
-        if [ "$verbose" ]; then
+       if [ "$verbose" ]; then
             echo -en "\n$msg_emphasis"
             printf '\055%.0s' {1..70}
             printf '\n%-40s%30s\n' "$0 lsfs" "$currentdate"
@@ -48,7 +55,6 @@ case "$util" in
         ;;
 
     "lsdiscs")  # lista los discos en el systema
-        source "tools/functions/discs/lsdiscs.sh"
         if [ "$verbose" ]; then
             echo -en "\n$msg_emphasis"
             printf '\055%.0s' {1..70}
@@ -66,8 +72,6 @@ case "$util" in
         ;;
 
     "lsparts")  # lista las particiones
-        source "tools/functions/discs/lsdev.sh"
-        source "tools/functions/discs/lsparts.sh"
         if [ "$verbose" ]; then
             echo -en "\n$msg_emphasis"
             printf '\055%.0s' {1..70}
@@ -85,7 +89,6 @@ case "$util" in
         ;;
 
     "lsdev")    # obtiene el device
-        source "tools/functions/discs/lsdev.sh"
         if [ "$verbose" ]; then
             echo -en "\n$msg_emphasis"
             printf '\055%.0s' {1..70}
@@ -103,22 +106,16 @@ case "$util" in
         ;;
 
     "lsuuid")   # obtiene el UUID
-        source "tools/functions/discs/lsdev.sh"
-        source "tools/functions/discs/lsuuid.sh"
         lsuuid "$@"
         exit $?
         ;;
     
     "lslabel")  # obtiene el LABEL
-        source "tools/functions/discs/lsdev.sh"
-        source "tools/functions/discs/lslabel.sh"
         lslabel "$@"
         exit $?
         ;;
 
     "fstype")   # obtiene tipo del sistema de ficheros
-        source "tools/functions/discs/lsdev.sh"
-        source "tools/functions/discs/fstype.sh"
         fstype "$@"
         exit $?
         ;;

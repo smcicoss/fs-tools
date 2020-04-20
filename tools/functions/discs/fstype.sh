@@ -19,6 +19,9 @@
 #       montada
 #######################################################
 
+# dependencias
+source "$LIB_DIR/fsdev.sh"
+
 function fstype(){
     
     if [ -z "$1" ]; then

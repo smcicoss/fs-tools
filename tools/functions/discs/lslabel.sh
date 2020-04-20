@@ -17,6 +17,9 @@
 #
 #######################################################
 
+# dependencias
+source "$LIB_DIR/lsdev.sh"
+
 function lslabel(){
 
     if [ -z "$1" ]; then

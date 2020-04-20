@@ -9,6 +9,9 @@
 # autor:	Simón Martínez <simon@cicoss.net>
 #######################################################
 
+# dependencia
+source "$LIB_DIR/lsdev.sh"
+
 function lsparts(){
     if [ ! -z $verbose ]; then unset verbose; fi
     if [[ $# -ne 0 && $1 == "-v" ]]; then local verbose=0; shift; fi
