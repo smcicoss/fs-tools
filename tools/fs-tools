@@ -12,7 +12,7 @@
 #######################################################
 
 # directorios instalación
-declare -r LIB_DIR="tools/functions/discs"
+declare -r LIB_DIR="tools/functions"
 declare -r CONF_DIR="datos/etc/fs-tools"
 
 # color
