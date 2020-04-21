@@ -35,5 +35,4 @@ function mountpoint(){
 
     df "$origen" | grep / | tr -s '[[:blank:]]' ' ' | cut -d " " -f 6
     return $?
-
 }
