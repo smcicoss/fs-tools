@@ -2,7 +2,7 @@
 # -*- ENCODING: UTF-8 -*-
 # ·
 #######################################################
-#					mount-point
+#				function mountpoint
 #------------------------------------------------------
 # Obtiene el punto de montaje del dispositivo
 #		en el que descansa el fichereo
@@ -10,11 +10,10 @@
 # autor:	Simón Martínez <simon@cicoss.net>
 #------------------------------------------------------
 # Uso:
-# 	mount-point [directorio | file | dispositivo]
+# 	mountpoint [directorio | file | dispositivo]
 #
 #	Si no se especifica será el directorio actual
-#	-s Salida concisa. Solo el nombre del
-#		dispositivo
+#	-v verbose
 #
 #######################################################
 
@@ -35,5 +34,4 @@ function mountpoint(){
 
     df "$origen" | grep / | tr -s '[[:blank:]]' ' ' | cut -d " " -f 6
     return $?
-
 }
