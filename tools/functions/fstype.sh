@@ -4,7 +4,7 @@
 #######################################################
 #						fstype
 #------------------------------------------------------
-#	Muestra el sistema de ficheros de una partición 
+# Muestra el sistema de ficheros de una partición 
 #       o un directorio
 #------------------------------------------------------
 # autor:	Simón Martínez <simon@cicoss.net>
@@ -20,7 +20,7 @@
 #######################################################
 
 # dependencias
-source "$LIB_DIR/fsdev.sh"
+source "$LIB_DIR/lsdev.sh"
 
 function fstype(){
     

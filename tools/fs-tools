@@ -142,6 +142,23 @@ case "$util" in
         exit $?
         ;;
 
+    "sizedisc") #obtiene el tamaño del disco
+        if [ "$verbose" ]; then
+            echo -en "\n$msg_emphasis"
+            printf '\055%.0s' {1..70}
+            printf '\n%-40s%30s\n' "$0 lsparts" "$currentdate"
+            printf '\055%.0s' {1..70}; echo ""
+            sizedisc -v "$@"
+            retcode=$?
+            printf '\055%.0s' {1..70}; echo ""
+            echo -e $msg_end
+            exit $retcode
+        else
+            sizedisc "$@"
+            exit $?
+        fi
+        ;;
+
     *)          # deconocido
         echo -e $msg_error"Error: el comando $msg_panic'$util'$msg_error no existe"$msg_end
         echo -e $msg_emphasis"utilice 'fs-tools lscommands para un listado de comandos"$msg_end

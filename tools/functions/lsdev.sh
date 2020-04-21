@@ -4,7 +4,7 @@
 #######################################################
 #			function lsdev
 #------------------------------------------------------
-#	Muestra el dispositivo en el que descansa
+# Muestra el dispositivo en el que descansa
 #		el fichero o directorio
 #------------------------------------------------------
 # autor:	Simón Martínez <simon@cicoss.net>

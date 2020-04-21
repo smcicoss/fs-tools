@@ -4,7 +4,7 @@
 #######################################################
 #			function lsuuid
 #------------------------------------------------------
-#	Muestra el UUID del sistema de ficheros
+# Muestra el UUID del sistema de ficheros
 #------------------------------------------------------
 # autor:	Simón Martínez <simon@cicoss.net>
 #------------------------------------------------------
