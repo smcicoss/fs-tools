@@ -10,6 +10,9 @@
 #######################################################
 
 function lscommands(){
+    if [ ! -z $verbose ]; then unset verbose; fi
+    if [[ $# -ne 0 && $1 == "-v" ]]; then local verbose=0; shift; fi
+
     printf '%-15s %-50s\n' "COMANDO" "DESCRIPCIÓN"
     for filelib in $LIB_DIR/*.sh; do
         description="$(awk 'NR==7' $filelib)"

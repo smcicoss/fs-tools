@@ -2,42 +2,38 @@
 # -*- ENCODING: UTF-8 -*-
 # ·
 #######################################################
-#			function label
+#					mount-point
 #------------------------------------------------------
-# Muestra la etiqueta de la partición
+# Obtiene el punto de montaje del dispositivo
+#		en el que descansa el fichereo
 #------------------------------------------------------
 # autor:	Simón Martínez <simon@cicoss.net>
 #------------------------------------------------------
 # Uso:
-# 	label [device | directorio | fichero]
+# 	mount-point [directorio | file | dispositivo]
 #
-#	si no se especifica será el directorio actual
-#
-#	Requiere del script indev
+#	Si no se especifica será el directorio actual
+#	-s Salida concisa. Solo el nombre del
+#		dispositivo
 #
 #######################################################
 
-# dependencias
-source "$LIB_DIR/lsdev.sh"
-
-function lslabel(){
+function mountpoint(){
     if [ ! -z $verbose ]; then unset verbose; fi
     if [[ $# -ne 0 && $1 == "-v" ]]; then local verbose=0; shift; fi
 
-    if [ -z "$1" ]; then
-        source=$(realpath ".")
+    if [ $# -ne 0 ]; then
+        origen=$(realpath "$1")
     else
-        source=$(realpath "$1")
+        origen=$(realpath ".")
     fi
 
-    if [ ! -e "$source" ]; then return 1; fi
-
-    info=$(file -b "$source")
-
-    if [[ ! "$info" =~ "block special" ]]; then
-        source=$(lsdev "$source")
+    if [ -d "$origen" ]; then
+        #Si es un directorio tal cual
+        origen="$origen/"
     fi
 
-    sudo lsblk -no LABEL $source
+    df "$origen" | grep / | tr -s '[[:blank:]]' ' ' | cut -d " " -f 6
     return $?
+
 }

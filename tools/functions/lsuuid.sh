@@ -21,6 +21,9 @@
 source "$LIB_DIR/lsdev.sh"
 
 function lsuuid(){
+    if [ ! -z $verbose ]; then unset verbose; fi
+    if [[ $# -ne 0 && $1 == "-v" ]]; then local verbose=0; shift; fi
+
     if [ -z "$1" ]; then
         source=$(realpath ".")
     else
