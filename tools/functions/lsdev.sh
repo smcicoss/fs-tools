@@ -10,7 +10,7 @@
 # autor:	Simón Martínez <simon@cicoss.net>
 #------------------------------------------------------
 # Uso:
-# 	lsdev [-v] [directorio | file]
+# 	lsdev [-v] [directorio | file | DEVICE]
 #
 #	Si no se especifica será el directorio actual
 #	-v verbose=Salida extendida.
