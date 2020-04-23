@@ -13,7 +13,7 @@
 #
 #	-v verbose
 #
-#   requiere jq (json query)
+#   requiere jq (json query) y uui2dev
 #
 #######################################################
 
