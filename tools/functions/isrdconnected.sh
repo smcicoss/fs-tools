@@ -38,7 +38,6 @@ function isrdconnected(){
             return 2
         fi
     fi
-    echo $uuid
 
     device=$(uuid2dev $uuid | cut -f 2)
 
