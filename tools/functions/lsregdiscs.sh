@@ -17,22 +17,36 @@
 #
 #######################################################
 
+# dependencias
+source "$LIB_DIR/uuid2dev.sh"
+
+declare -r REGISTRO_DISCOS="/etc/fs-tools/disks.json"
+
 function lsregdiscs(){
     if [ ! -z $verbose ]; then unset verbose; fi
     if [[ $# -ne 0 && $1 == "-v" ]]; then local verbose=0; shift; fi
 
     if [[ $# -eq 0 || $1 == "--all" ]]; then
-        local -a result=($(jq -rc 'keys' /etc/fs-tools/disks.json  | \
+        local -a result=($(jq -rc 'keys'  $REGISTRO_DISCOS | \
                     sed -e 's/\[//g' -e 's/\]//g' -e 's/,/ /g' -e 's/\"//g'))
         local -i retcode=$?
+    else
+        local -a result[0]=$1
     fi
 
     if [ "$verbose" ]; then
-        for disk in ${result[*]}; do
-            echo $disk
+        printf "%-15s %-36s %s\n" "NOMBRE" "UUID" "DEVICE"
+        for name in ${result[*]}; do
+            uuid=$(jq -r "."\"$name\"".uuid" $REGISTRO_DISCOS)
+            device=$(uuid2dev $uuid | cut -f 2)
+            printf "%-15s %-36s %s\n" $name $uuid $device
         done
     else
-        echo "${result[@]}"
+        for name in ${result[*]}; do
+            uuid=$(jq -r "."\"$name\"".uuid" $REGISTRO_DISCOS)
+            device=$(uuid2dev $uuid | cut -f 2)
+            printf "%s\t%s\t%s\n" $name $uuid $device
+        done
     fi
     return $retcode
 }
