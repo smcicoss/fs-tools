@@ -26,18 +26,27 @@ function lslabel(){
 
     if [ -z "$1" ]; then
         source=$(realpath ".")
+    elif [ $1 == "--all" ]; then
+        local all="True"
     else
         source=$(realpath "$1")
     fi
 
-    if [ ! -e "$source" ]; then return 1; fi
+    if [ ! "$all" ]; then
+        if [ ! -e "$source" ]; then return 1; fi
 
-    info=$(file -b "$source")
+        info=$(file -b "$source")
 
-    if [[ ! "$info" =~ "block special" ]]; then
-        source=$(lsdev "$source")
+        if [[ ! "$info" =~ "block special" ]]; then
+            source=$(lsdev "$source")
+        fi
+
+        sudo lsblk -no LABEL $source
+        return $?
+    else
+        for fname in /dev/disk/by-label/*; do
+            echo $(basename $fname)
+        done
+        return 0
     fi
-
-    sudo lsblk -no LABEL $source
-    return $?
 }
