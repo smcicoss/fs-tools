@@ -22,25 +22,28 @@ function label2dev(){
     if [ $# -eq 0 ]; then return 1; fi
 
     if [ $1 == "--all" ]; then
+        all="True"
         IFS=$'\n' local -a result=($(ls -l /dev/disk/by-label/ | \
                                     grep -ve "total" | \
                                     cut -d " " -f 9,11 | \
                                     sed 's/\.\.\///g'))
-        retcode=$?
     else
+        if [ ! -e "/dev/disk/by-label/$1" ]; then return 2; fi
+
         IFS=$'\n' local -a result=($(ls -l /dev/disk/by-label/ | \
                                     grep -e $1 | \
                                     cut -d " " -f 9,11 | \
                                     sed 's/\.\.\///g'))
-        retcode=$?
     fi
 
     if [ "$verbose" ]; then
         printf "%-20s\t%s\n" "LABEL" "DEVICE"
         printf "%-20s\t/dev/%s\n" ${result[*]}
+    elif [ "$all" ]; then
+        printf "%-20s /dev/%s\n" ${result[*]}
     else
-        printf "%s\t/dev/%s\n" ${result[*]}
+        echo ${result[1]}
     fi
 
-    return $retcode
+    return 0
 }
