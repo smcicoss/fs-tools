@@ -32,7 +32,7 @@ function lsuuid(){
         source=$(realpath "$1")
     fi
     
-    if [ ! "$all" ];then
+    if [ ! "$all" ]; then
         if [ ! -e "$source" ]; then return 1; fi
 
         info=$(file -b "$source")
@@ -40,6 +40,7 @@ function lsuuid(){
         if [[ ! "$info" =~ "block special" ]]; then
             source=$(lsdev "$source")
         fi
+        
         sudo lsblk -n -o UUID "$source" | sed '/^ *$/d'
         return 0
     else
