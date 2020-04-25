@@ -22,17 +22,18 @@ function uuid2dev(){
     if [ $# -eq 0 ]; then return 1; fi
 
     if [ $1 == "--all" ]; then
+        local all="True"
         IFS=$'\n' local -a result=($(ls -l /dev/disk/by-uuid/ | \
                                     grep -ve "total" | \
                                     cut -d " " -f 9,11 | \
                                     sed 's/\.\.\///g'))
-        retcode=$?
     else
+        if [ ! -e "/dev/disk/by-uuid/$1" ]; then return 2; fi
+
         IFS=$'\n' local -a result=($(ls -l /dev/disk/by-uuid/ | \
                                     grep -e $1 | \
                                     cut -d " " -f 9,11 | \
                                     sed 's/\.\.\///g'))
-        retcode=$?
     fi
     
     if [ ${#result[@]} -eq 0 ]; then return 1; fi
@@ -40,9 +41,11 @@ function uuid2dev(){
     if [ "$verbose" ]; then
         printf "%-36s\t%s\n" "UUID" "DEVICE"
         printf "%-36s\t/dev/%s\n" ${result[*]}
-    else
+    elif [ "$all" ]; then
         printf "%s\t/dev/%s\n" ${result[*]}
+    else
+        echo ${result[1]}
     fi
 
-    return $retcode
+    return 0
 }
