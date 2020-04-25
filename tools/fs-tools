@@ -46,7 +46,7 @@ source "$LIB_DIR/$util.sh"
 if [ "$verbose" ]; then
     echo -en "\n$msg_emphasis"
     printf '\055%.0s' {1..70}
-    printf '\n%-40s%30s\n' "$0 $util" "$currentdate"
+    printf '\n%-40s%30s\n' "$(basename $0) $util ${@}" "$currentdate"
     printf '\055%.0s' {1..70}; echo ""
     $util -v $@
     retcode=$?
