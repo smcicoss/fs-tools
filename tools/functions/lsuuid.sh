@@ -40,7 +40,7 @@ function lsuuid(){
         if [[ ! "$info" =~ "block special" ]]; then
             source=$(lsdev "$source")
         fi
-        sudo lsblk -n -o UUID "$source"
+        sudo lsblk -n -o UUID "$source" | sed '/^ *$/d'
         return 0
     else
         for fname in /dev/disk/by-uuid/*; do

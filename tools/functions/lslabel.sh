@@ -41,7 +41,7 @@ function lslabel(){
             source=$(lsdev "$source")
         fi
 
-        sudo lsblk -no LABEL $source
+        sudo lsblk -no LABEL $source | sed '/^ *$/d'
         return $?
     else
         for fname in /dev/disk/by-label/*; do
