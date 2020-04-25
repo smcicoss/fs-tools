@@ -26,17 +26,26 @@ function lsuuid(){
 
     if [ -z "$1" ]; then
         source=$(realpath ".")
+    elif [ $1 == "--all" ]; then
+        local all="True"
     else
         source=$(realpath "$1")
     fi
     
-    if [ ! -e "$source" ]; then return 1; fi
+    if [ ! "$all" ];then
+        if [ ! -e "$source" ]; then return 1; fi
 
-    info=$(file -b "$source")
+        info=$(file -b "$source")
 
-    if [[ ! "$info" =~ "block special" ]]; then
-        source=$(lsdev "$source")
+        if [[ ! "$info" =~ "block special" ]]; then
+            source=$(lsdev "$source")
+        fi
+        sudo lsblk -n -o UUID "$source"
+        return 0
+    else
+        for fname in /dev/disk/by-uuid/*; do
+            echo $(basename $fname)
+        done
+        return 0
     fi
-    sudo lsblk -n -o UUID "$source"
-    return 0
 }
