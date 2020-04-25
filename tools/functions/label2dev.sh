@@ -40,7 +40,7 @@ function label2dev(){
         printf "%-20s\t%s\n" "LABEL" "DEVICE"
         printf "%-20s\t/dev/%s\n" ${result[*]}
     elif [ "$all" ]; then
-        printf "%-20s /dev/%s\n" ${result[*]}
+        printf "%s\t/dev/%s\n" ${result[*]}
     else
         echo ${result[1]}
     fi
