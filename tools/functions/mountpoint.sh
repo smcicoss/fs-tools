@@ -18,6 +18,9 @@
 #######################################################
 
 # dependencia
+: ${LIB_DIR:="/lib/fs-tools"} #Directorio por defecto si no
+                                # asignado en script padre
+
 source "$LIB_DIR/uuid2dev.sh"
 source "$LIB_DIR/label2dev.sh"
 source "$LIB_DIR/lslabel.sh"

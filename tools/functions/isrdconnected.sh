@@ -16,6 +16,9 @@
 #######################################################
 
 # dependencias
+: ${LIB_DIR:="/lib/fs-tools"} #Directorio por defecto si no
+                                # asignado en script padre
+
 source "$LIB_DIR/uuid2dev.sh"
 
 declare -r REGISTRO_DISCOS="/etc/fs-tools/disks.json"

@@ -9,6 +9,9 @@
 # autor:	Simón Martínez <simon@cicoss.net>
 #######################################################
 
+: ${LIB_DIR:="/lib/fs-tools"} #Directorio por defecto si no
+                                # asignado en script padre
+
 function lscommands(){
     if [ ! -z $verbose ]; then unset verbose; fi
     if [[ $# -ne 0 && $1 == "-v" ]]; then local verbose=0; shift; fi

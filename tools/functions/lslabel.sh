@@ -18,6 +18,9 @@
 #######################################################
 
 # dependencias
+: ${LIB_DIR:="/lib/fs-tools"} #Directorio por defecto si no
+                                # asignado en script padre
+
 source "$LIB_DIR/lsdev.sh"
 
 function lslabel(){
