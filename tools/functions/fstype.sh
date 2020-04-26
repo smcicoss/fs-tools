@@ -38,6 +38,12 @@ function fstype(){
         source=$(lsdev "$source")
     fi
     
-    lsblk -n -o FSTYPE $source
-    return $?
+    if [ "$verbose" ]; then
+        lsblk -lo NAME,FSTYPE $source
+        local retcode=$?
+    else
+        lsblk -no FSTYPE $source
+        local retcode=$?
+    fi
+    return $retcode
 }
