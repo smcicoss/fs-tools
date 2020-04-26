@@ -44,7 +44,7 @@ function sizedisc(){
             lsblk -ladpo KNAME,MODEL,SIZE,TYPE $source | grep -v -e "/dev/loop"
             return $?
         else
-            lsblk -ladpno KNAME,SIZE $source | grep -v -e "/dev/loop"
+            lsblk -ladpno SIZE $source | grep -v -e "/dev/loop"
             return $?
         fi
     fi
