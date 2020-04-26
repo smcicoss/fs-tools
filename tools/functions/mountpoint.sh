@@ -26,7 +26,7 @@ source "$LIB_DIR/label2dev.sh"
 source "$LIB_DIR/lslabel.sh"
 
 function mountpoint(){
-   if [ ! -z $verbose ]; then unset verbose; fi
+    if [ ! -z $verbose ]; then unset verbose; fi
     if [[ $# -ne 0 && $1 == "-v" ]]; then local verbose=0; shift; fi
 
     if [ $# -eq 0 ]; then
