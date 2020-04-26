@@ -42,7 +42,7 @@ function label2dev(){
     elif [ "$all" ]; then
         printf "%s\t/dev/%s\n" ${result[*]}
     else
-        echo ${result[1]}
+        echo "/dev/${result[1]}"
     fi
 
     return 0
