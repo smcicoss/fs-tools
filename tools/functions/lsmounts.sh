@@ -36,7 +36,7 @@ function lsmounts(){
         devname=${d/,*/}
         if [ "$verbose" ]; then
             printf "%-30s %s\n" $devname $mp
-        elif [ $filter == "" ]; then
+        elif [ "$filter" == "" ]; then
             echo -e "$devname\t$mp"
         else
             echo $mp
