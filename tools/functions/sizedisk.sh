@@ -2,14 +2,14 @@
 # -*- ENCODING: UTF-8 -*-
 # ·
 #######################################################
-#			    function sizedisc
+#			    function sizedisk
 #------------------------------------------------------
 # Muestra la capacidad de los discos
 #------------------------------------------------------
 # autor:	Simón Martínez <simon@cicoss.net>
 #######################################################
 
-function sizedisc(){
+function sizedisk(){
     if [ ! -z $verbose ]; then unset verbose; fi
     if [[ $# -ne 0 && $1 == "-v" ]]; then local verbose=0; shift; fi
     

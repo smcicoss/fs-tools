@@ -1,23 +1,18 @@
 #! /bin/bash
 # -*- ENCODING: UTF-8 -*-
-# ·
+#·
 #######################################################
-#			function lsdiscs
+#			      function lsusbdisks
 #------------------------------------------------------
-# Muestra los discos en el sistema
+# Lista los discos usb
 #------------------------------------------------------
 # autor:	Simón Martínez <simon@cicoss.net>
 #######################################################
 
-function lsdiscs(){
+function lsusbdisks(){
     if [ ! -z $verbose ]; then unset verbose; fi
     if [[ $# -ne 0 && $1 == "-v" ]]; then local verbose=0; shift; fi
 
-    if [ "$verbose" ]; then
-        lsblk -ildo KNAME,TYPE,SIZE,MODEL | grep -e "KNAME" -e "disk" -e "rom"
-        return $?
-    else
-        lsblk -ilndo KNAME,TYPE | grep -e "disk" -e "rom" | cut -d ' ' -f 1
-        return $?
-    fi
-}
+    grep -Ff <(sudo hwinfo --disk --short) <(sudo hwinfo --usb --short) | grep -v "disk:"
+    return $?
+ }

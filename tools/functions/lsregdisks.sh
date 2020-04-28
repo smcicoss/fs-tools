@@ -2,14 +2,14 @@
 # -*- ENCODING: UTF-8 -*-
 # ·
 #######################################################
-#					function lsregdiscs
+#					function lsregdisks
 #------------------------------------------------------
 # Lista los discos registrados
 #------------------------------------------------------
 # autor:	Simón Martínez <simon@cicoss.net>
 #------------------------------------------------------
 # Uso:
-# 	lsregdiscs [-v] [uuid | nombre | --all]
+# 	lsregdisks [-v] [uuid | nombre | --all]
 #
 #	-v verbose
 #
@@ -25,7 +25,7 @@ source "$LIB_DIR/uuid2dev.sh"
 
 declare -r REGISTRO_DISCOS="/etc/fs-tools/disks.json"
 
-function lsregdiscs(){
+function lsregdisks(){
     if [ ! -z $verbose ]; then unset verbose; fi
     if [[ $# -ne 0 && $1 == "-v" ]]; then local verbose=0; shift; fi
 
