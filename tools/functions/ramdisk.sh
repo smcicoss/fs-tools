@@ -84,7 +84,7 @@ function ramdisk(){
 
     sudo install -d $target
     if [ $? -ne 0 ]; then return $?; fi
-    sudo chown simo $target
+    sudo chown $(logname) $target
     if [ $? -ne 0 ]; then return $?; fi
     sudo chmod 700 $target
     if [ $? -ne 0 ]; then return $?; fi

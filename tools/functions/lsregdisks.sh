@@ -23,7 +23,7 @@
 
 source "$LIB_DIR/uuid2dev.sh"
 
-declare -r REGISTRO_DISCOS="/etc/fs-tools/disks.json"
+: ${REGISTRO_DISCOS:="/etc/fs-tools/disks.json"}
 
 function lsregdisks(){
     if [ ! -z $verbose ]; then unset verbose; fi
