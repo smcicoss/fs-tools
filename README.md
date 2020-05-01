@@ -7,6 +7,16 @@
 > *Trabaja sobre* **HDs, USBs, RAMDiscs, ISOs, CDROMs**
 >
 > *Utiliza **scripts Bash** para el trabajo y **scripts Python** para la configuración.*
+  
+---
+
+~~~text
+    Pretende formar una colección de funciones simples  
+    para facilitar el trabajo con scripts en BASH  
+    de mantenimiento
+~~~
+
+---
 
 ## Sección Discos y Particiones
 
@@ -53,3 +63,5 @@ Desmonta una imagen ISO
 - **dehumanise** (auxiliar)  
 Convierte numeros en formato humano a entero  
     (1K[iB] -> 1024, 1KBS -> 1000)
+
+---
