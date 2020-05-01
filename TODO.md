@@ -1,7 +1,9 @@
 # TODO
 
-## Tareas a realizar
+## Común
 
 - Crear estructura de directorios
 
-- Crear funciones y caso de prueba
+- desarrollar instalador
+
+- Documentar

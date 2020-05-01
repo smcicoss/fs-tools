@@ -4,7 +4,7 @@
 #######################################################
 #			function label
 #------------------------------------------------------
-# Muestra la etiqueta de la partición
+# Lista etiquetas de la particiones
 #------------------------------------------------------
 # autor:	Simón Martínez <simon@cicoss.net>
 #------------------------------------------------------
@@ -12,8 +12,6 @@
 # 	label [device | directorio | fichero]
 #
 #	si no se especifica será el directorio actual
-#
-#	Requiere del script indev
 #
 #######################################################
 
