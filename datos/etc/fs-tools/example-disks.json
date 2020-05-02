@@ -1,0 +1,7 @@
+{
+	"home-2": {
+		"uuid": "26234a53-xxxx-4651-xxxx-09ba6dcf9c70",
+		"mountPoint": "/home/simo/Datos/home-2",
+		"crypt": true
+    }
+}
