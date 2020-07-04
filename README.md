@@ -12,8 +12,9 @@
 
 ~~~text
     Pretende formar una colección de funciones simples  
-    para facilitar el trabajo con scripts en BASH  
-    de mantenimiento
+    para facilitar el trabajo con scripts de mantenimiento
+    en BASH  
+    
 ~~~
 
 ---
